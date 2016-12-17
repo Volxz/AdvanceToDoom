@@ -32,7 +32,6 @@ public class Game {
             case "e": moveRoom(1, 0); break;
             case "s": moveRoom(0, -1); break;
             case "w": moveRoom(-1, 0); break;
-            case "move"
         }
 
     }

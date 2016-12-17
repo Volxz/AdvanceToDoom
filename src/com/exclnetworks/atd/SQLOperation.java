@@ -15,20 +15,20 @@ public class SQLOperation {
      */
     static int getRoomID(int x, int y) {
         int rReturn = 0;
-        Connection conn=null;
-        PreparedStatement pst=null;
-        ResultSet rs=null;
-        conn=MySQLConnect.ConnectDb();
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        conn = MySQLConnect.ConnectDb();
         try {
             String sql = "SELECT id FROM rooms WHERE x = ? AND y = ?";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1,Integer.toString(x));
-            pst.setString(2,Integer.toString(y));
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, Integer.toString(x));
+            pst.setString(2, Integer.toString(y));
             rs = pst.executeQuery();
-            if(rs.next()) {
-                rReturn  = Integer.valueOf(rs.getString("id"));
+            if (rs.next()) {
+                rReturn = Integer.valueOf(rs.getString("id"));
             }
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
 
         }
@@ -40,19 +40,17 @@ public class SQLOperation {
      */
     static int getUUID(String username) {
         int rReturn = 0;
-        Connection conn=null;
-        PreparedStatement pst=null;
-        ResultSet rs=null;
-        conn=MySQLConnect.ConnectDb();
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        conn = MySQLConnect.ConnectDb();
         try {
             String sql = "SELECT id FROM users WHERE username = ?";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1,username);
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
             rs = pst.executeQuery();
-            if(rs.next()) {
-                rReturn  = Integer.getInteger(rs.getString("id"));
-            }
-        } catch (SQLException e ) {
+            if (rs.next()) rReturn = Integer.parseInt(rs.getString("id"));
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
 
         }
@@ -64,19 +62,19 @@ public class SQLOperation {
      */
     static String getPass(int uid) {
         String rReturn = null;
-        Connection conn=null;
-        PreparedStatement pst=null;
-        ResultSet rs=null;
-        conn=MySQLConnect.ConnectDb();
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        conn = MySQLConnect.ConnectDb();
         try {
             String sql = "SELECT password FROM users WHERE id = ?";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1,Integer.toString(uid));
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, Integer.toString(uid));
             rs = pst.executeQuery();
-            if(rs.next()) {
-                rReturn  = rs.getString("password");
+            if (rs.next()) {
+                rReturn = rs.getString("password");
             }
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
 
         }
@@ -88,19 +86,19 @@ public class SQLOperation {
      */
     static String getPseudo(int uuid) {
         String rReturn = null;
-        Connection conn=null;
-        PreparedStatement pst=null;
-        ResultSet rs=null;
-        conn=MySQLConnect.ConnectDb();
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        conn = MySQLConnect.ConnectDb();
         try {
             String sql = "SELECT pseudo FROM users WHERE id = ?";
-            pst=conn.prepareStatement(sql);
-            pst.setString(1,Integer.toString(uuid));
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, Integer.toString(uuid));
             rs = pst.executeQuery();
-            if(rs.next()) {
-                rReturn  = rs.getString("pseudo");
+            if (rs.next()) {
+                rReturn = rs.getString("pseudo");
             }
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
 
         }
@@ -110,8 +108,23 @@ public class SQLOperation {
     /**
      * Add user to database
      */
-    static void addUser(String username, String password, String pseudo){
+    static void addUser(String username, String password, String pseudo) {
+        Connection conn = null;
+        PreparedStatement pst = null;
+        conn = MySQLConnect.ConnectDb();
+        try {
+            String sql = "INSERT INTO users (username, password, pseudo)" + " VALUES (?, ?, ?)";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
+            pst.setString(2, password);
+            pst.setString(3, pseudo);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
 
+        }
     }
 
 }
+
+

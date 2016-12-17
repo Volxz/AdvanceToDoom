@@ -7,10 +7,10 @@ public class MySQLConnect {
     Connection conn = null;
 
     public static Connection ConnectDb(){
-        String mysqlUrl = "jdbc:mysql://:3306/javatestdb";
-        String user = "root";
+        String mysqlUrl = "";
+        String user = "";
         String passwd = "";
-        try{https://github.com/Volxz/AdvanceToDoomhttps://github.com/Volxz/AdvanceToDoom
+        try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection(mysqlUrl,user, passwd);
             return conn;

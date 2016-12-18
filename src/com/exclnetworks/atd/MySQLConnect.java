@@ -19,15 +19,15 @@ import javax.swing.*;
 public class MySQLConnect {
     Connection conn = null;
 
-    public static Connection ConnectDb(){
+    public static Connection ConnectDb() {
         String mysqlUrl = "";
         String user = "";
         String passwd = "";
-        try{
+        try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(mysqlUrl,user, passwd);
+            Connection conn = DriverManager.getConnection(mysqlUrl, user, passwd);
             return conn;
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
             return null;
 

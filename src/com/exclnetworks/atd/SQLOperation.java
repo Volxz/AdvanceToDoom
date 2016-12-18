@@ -7,14 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *88888888888                          88     888b      88                                                                    88
- *88                                   88     8888b     88                ,d                                                  88
- *88                                   88     88 `8b    88                88                                                  88
- *88aaaaa      8b,     ,d8  ,adPPYba,  88     88  `8b   88   ,adPPYba,  MM88MMM  8b      db      d8   ,adPPYba,   8b,dPPYba,  88   ,d8   ,adPPYba,
- *88"""""       `Y8, ,8P'  a8"     ""  88     88   `8b  88  a8P_____88    88     `8b    d88b    d8'  a8"     "8a  88P'   "Y8  88 ,a8"    I8[    ""
- *88              )888(    8b          88     88    `8b 88  8PP"""""""    88      `8b  d8'`8b  d8'   8b       d8  88          8888[       `"Y8ba,
- *88            ,d8" "8b,  "8a,   ,aa  88     88     `8888  "8b,   ,aa    88,      `8bd8'  `8bd8'    "8a,   ,a8"  88          88`"Yba,   aa    ]8I
- *88888888888  8P'     `Y8  `"Ybbd8"'  88     88      `888   `"Ybbd8"'    "Y888      YP      YP       `"YbbdP"'   88          88   `Y8a  `"YbbdP"'
+ * 88888888888                          88     888b      88                                                                    88
+ * 88                                   88     8888b     88                ,d                                                  88
+ * 88                                   88     88 `8b    88                88                                                  88
+ * 88aaaaa      8b,     ,d8  ,adPPYba,  88     88  `8b   88   ,adPPYba,  MM88MMM  8b      db      d8   ,adPPYba,   8b,dPPYba,  88   ,d8   ,adPPYba,
+ * 88"""""       `Y8, ,8P'  a8"     ""  88     88   `8b  88  a8P_____88    88     `8b    d88b    d8'  a8"     "8a  88P'   "Y8  88 ,a8"    I8[    ""
+ * 88              )888(    8b          88     88    `8b 88  8PP"""""""    88      `8b  d8'`8b  d8'   8b       d8  88          8888[       `"Y8ba,
+ * 88            ,d8" "8b,  "8a,   ,aa  88     88     `8888  "8b,   ,aa    88,      `8bd8'  `8bd8'    "8a,   ,a8"  88          88`"Yba,   aa    ]8I
+ * 88888888888  8P'     `Y8  `"Ybbd8"'  88     88      `888   `"Ybbd8"'    "Y888      YP      YP       `"YbbdP"'   88          88   `Y8a  `"YbbdP"'
  */
 
 
@@ -39,7 +39,6 @@ public class SQLOperation {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
-
         }
         return rReturn;
     }
@@ -61,7 +60,6 @@ public class SQLOperation {
             if (rs.next()) rReturn = Integer.parseInt(rs.getString("id"));
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
-
         }
         return rReturn;
     }
@@ -85,7 +83,6 @@ public class SQLOperation {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
-
         }
         return rReturn;
     }
@@ -109,7 +106,6 @@ public class SQLOperation {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
-
         }
         return rReturn;
     }
@@ -130,7 +126,6 @@ public class SQLOperation {
             pst.executeUpdate();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
-
         }
     }
 
@@ -153,9 +148,67 @@ public class SQLOperation {
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
-
         }
         return rReturn;
+    }
+
+    /**
+     * Get Room X From Room Unique Identifier
+     */
+
+    static int getRoomX(int id) {
+        int rReturn = 0;
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        conn = MySQLConnect.ConnectDb();
+        try {
+            String sql = "SELECT x FROM rooms WHERE id = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, Integer.toString(id));
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                rReturn = Integer.valueOf(rs.getString("x"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return rReturn;
+    }
+
+    static int getRoomY(int id) {
+        int rReturn = 0;
+        Connection conn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        conn = MySQLConnect.ConnectDb();
+        try {
+            String sql = "SELECT y FROM rooms WHERE id = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, Integer.toString(id));
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                rReturn = Integer.valueOf(rs.getString("y"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return rReturn;
+    }
+
+    static void syncRoom(int rmID) {
+        Connection conn = null;
+        PreparedStatement pst = null;
+        conn = MySQLConnect.ConnectDb();
+        try {
+            String sql = "UPDATE users SET room = ?" + " WHERE id = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, Integer.toString(rmID));
+            pst.setString(2, Integer.toString(Game.userID));
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 }
 

@@ -1,14 +1,14 @@
 package com.exclnetworks.atd;
 
 /**
- *88888888888                          88     888b      88                                                                    88
- *88                                   88     8888b     88                ,d                                                  88
- *88                                   88     88 `8b    88                88                                                  88
- *88aaaaa      8b,     ,d8  ,adPPYba,  88     88  `8b   88   ,adPPYba,  MM88MMM  8b      db      d8   ,adPPYba,   8b,dPPYba,  88   ,d8   ,adPPYba,
- *88"""""       `Y8, ,8P'  a8"     ""  88     88   `8b  88  a8P_____88    88     `8b    d88b    d8'  a8"     "8a  88P'   "Y8  88 ,a8"    I8[    ""
- *88              )888(    8b          88     88    `8b 88  8PP"""""""    88      `8b  d8'`8b  d8'   8b       d8  88          8888[       `"Y8ba,
- *88            ,d8" "8b,  "8a,   ,aa  88     88     `8888  "8b,   ,aa    88,      `8bd8'  `8bd8'    "8a,   ,a8"  88          88`"Yba,   aa    ]8I
- *88888888888  8P'     `Y8  `"Ybbd8"'  88     88      `888   `"Ybbd8"'    "Y888      YP      YP       `"YbbdP"'   88          88   `Y8a  `"YbbdP"'
+ * 88888888888                          88     888b      88                                                                    88
+ * 88                                   88     8888b     88                ,d                                                  88
+ * 88                                   88     88 `8b    88                88                                                  88
+ * 88aaaaa      8b,     ,d8  ,adPPYba,  88     88  `8b   88   ,adPPYba,  MM88MMM  8b      db      d8   ,adPPYba,   8b,dPPYba,  88   ,d8   ,adPPYba,
+ * 88"""""       `Y8, ,8P'  a8"     ""  88     88   `8b  88  a8P_____88    88     `8b    d88b    d8'  a8"     "8a  88P'   "Y8  88 ,a8"    I8[    ""
+ * 88              )888(    8b          88     88    `8b 88  8PP"""""""    88      `8b  d8'`8b  d8'   8b       d8  88          8888[       `"Y8ba,
+ * 88            ,d8" "8b,  "8a,   ,aa  88     88     `8888  "8b,   ,aa    88,      `8bd8'  `8bd8'    "8a,   ,a8"  88          88`"Yba,   aa    ]8I
+ * 88888888888  8P'     `Y8  `"Ybbd8"'  88     88      `888   `"Ybbd8"'    "Y888      YP      YP       `"YbbdP"'   88          88   `Y8a  `"YbbdP"'
  */
 
 public class Accounting {
@@ -42,7 +42,6 @@ public class Accounting {
                     passLoopActive = false;
                     Game.userID = SQLOperation.getUUID(username);
                     Game.Sleep(5);
-                    break;
                 } else {
                     System.out.println("**************************************");
                     System.out.println("!!!INVALID PASSWORD ENTRY!!!");
@@ -81,11 +80,11 @@ public class Accounting {
         }
         while (true) {
             Game.clearScreen();
-                System.out.println("*********************************************");
-                System.out.println("Password is good. Please pick a name that we");
-                System.out.println("can call you in game and on leader-boards.");
-                System.out.println("*********************************************");
-                pseudo = Game.getInput();
+            System.out.println("*********************************************");
+            System.out.println("Password is good. Please pick a name that we");
+            System.out.println("can call you in game and on leader-boards.");
+            System.out.println("*********************************************");
+            pseudo = Game.getInput();
             if (pseudo.length() > 1) {
                 break;
             } else {
